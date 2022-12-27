@@ -44,6 +44,7 @@ python TotalMain.py --mode infer
 
 The (BEST model for each SUBJECT and the tensorboard records) are saved in `${MODEL_SAVE_DIR}/{seed}_{step}_{alignment loss weight}/{model_name}` by default
 The results are saved in text and csv files in `${MODEL_SAVE_DIR}/{seed}_{step}_{alignment loss weight}/{Results}/{evalauation metric}` by default
+
 -> The BEST models are saved separately in each folder based on the evaluation metric used to select the model for validation.
 
 The result directory structure would look like this:
