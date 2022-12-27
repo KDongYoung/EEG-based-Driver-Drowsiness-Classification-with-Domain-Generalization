@@ -10,7 +10,15 @@ We propose an EEG-based driver drowsiness state (i.e., alert and drowsy) classif
 
 ## Getting Started
 
-1. Environment Requirement.
+### Environment Requirement
+
+Clone the repo:
+
+```bash
+git clone https://github.com/wacv1686/HANet.git
+```
+
+Install the HANet requirements using `conda`:
 
 ```terminal
 conda create -n MixAlign python=3.8.13
