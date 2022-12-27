@@ -15,7 +15,7 @@ We propose an EEG-based driver drowsiness state (i.e., alert and drowsy) classif
 Clone the repo:
 
 ```bash
-git clone https://github.com/wacv1686/HANet.git
+git clone https://github.com/KDongYoung/EEG-based-Driver-Drowsiness-Classification-with-Domain-Generalization.git
 ```
 
 Install the HANet requirements using `conda`:
@@ -43,7 +43,8 @@ ${DATASET_DIR}
 ```
 
 ### Training from scratch
-```
+
+```shell script
 # train
 python TotalMain.py --mode train
 # test
@@ -69,6 +70,13 @@ ${MODEL_SAVE_DIR}
 	    	|--${csv file}
 		|--${txt file}
 ```
+
+### Evaluation
+
+**Results for drowsiness classification:**
+| Model   | Acc. ± Std. (%)  | F1-score ± Std. | Recall ± Std. | Inference Time | Checkpoint |
+| ------- | ---------------- | --------------- | ------------- | -------------- | ---------- |
+| OURS    | 77.26 ± 10.44    | 0.6266 ± 0.24   | 0.6813 ± 0.25 | 3.853 ms       |  |
 
 
 ## Citation
