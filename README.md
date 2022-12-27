@@ -27,7 +27,7 @@ The directory structure should look like this:
 ```
 ${DATASET_DIR}
 	|--${S1}
-  |--${S2}
+        |--${S2}
 	|--${...}
 ```
 
