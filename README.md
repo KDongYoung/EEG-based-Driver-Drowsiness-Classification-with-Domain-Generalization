@@ -13,7 +13,7 @@ We propose an EEG-based driver drowsiness state (i.e., alert and drowsy) classif
 1. Environment Requirement.
 
 ```terminal
-conda create -n MixAlign python=3.6.12
+conda create -n MixAlign python=3.8.13
 conda activate MixAlign
 pip install -r requirements.txt
 ```
