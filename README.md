@@ -17,3 +17,40 @@ conda create -n MixAlign python=3.8.13
 conda activate MixAlign
 pip install -r requirements.txt
 ```
+
+## Data preparation
+
+First, create a folder `${DATASET_DIR}` to store the data of each subject.
+
+The directory structure should look like this:
+
+```
+${DATASET_DIR}
+	|--${S1}
+  |--${S2}
+	|--${...}
+```
+
+### Training from scratch
+```
+# train
+python TotalMain.py --mode train
+# test
+python TotalMain.py --mode infer
+```
+
+The results are saved in `${Project_Dir}/{seed}_{step}_{alignment loss weight}/{model_name}` by default
+
+
+## Citation
+
+```
+@inproceedings{kim2022eeg,
+  title={EEG-based Driver Drowsiness Classification via Calibration-Free Framework with Domain Generalization},
+  author={Kim, Dong-Young and Han, Dong-Kyun and Jeong, Ji-Hoon and Lee, Seong-Whan},
+  booktitle={2022 IEEE International Conference on Systems, Man, and Cybernetics (SMC)},
+  pages={2293--2298},
+  year={2022},
+  organization={IEEE}
+}
+```
