@@ -2,4 +2,4 @@
 
 This is an official repo for EEG-based Driver Drowsiness Classification via Calibration-Free Framework with Domain Generalization. [\[Paper\]](https://ieeexplore.ieee.org/abstract/document/9945216)
 
-!(docs/overview.png)
+![](docs/overview.jpg)
