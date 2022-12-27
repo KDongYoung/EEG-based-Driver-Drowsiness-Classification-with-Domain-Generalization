@@ -39,7 +39,7 @@ python TotalMain.py --mode train
 python TotalMain.py --mode infer
 ```
 
-The results are saved in `${Project_Dir}/{seed}_{step}_{alignment loss weight}/{model_name}` by default
+The results are saved in `${MODEL_SAVE_DIR}/{seed}_{step}_{alignment loss weight}/{model_name}` by default
 
 
 ## Citation
