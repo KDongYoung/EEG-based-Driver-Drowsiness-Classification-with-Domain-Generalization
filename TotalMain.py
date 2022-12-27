@@ -5,9 +5,9 @@ import Main
 """ Experiment Setting """ 
 # ARGUMENT
 parser = argparse.ArgumentParser(description='Fatigue')
-parser.add_argument('--data_root', default='dataset_folder_name/', help="name of the data folder")
+parser.add_argument('--data_root', default='DATASET_DIR/', help="name of the data folder")
 parser.add_argument('--run_code_folder', default='')
-parser.add_argument('--save_root', default='./Root_folder_name/')
+parser.add_argument('--save_root', default='./MODEL_SAVE_DIR/', help="where to save the models and tensorboard records")
 parser.add_argument('--result_dir', default="", help="save folder name")
 parser.add_argument('--total_path', default="", help='total result path')
 parser.add_argument('--cuda', type=bool, default=True, help='cuda')
