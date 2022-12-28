@@ -18,7 +18,7 @@ Clone the repo:
 git clone https://github.com/KDongYoung/EEG-based-Driver-Drowsiness-Classification-with-Domain-Generalization.git
 ```
 
-Install the HANet requirements using `conda`:
+Install the requirements using `conda`:
 
 ```terminal
 conda create -n MixAlign python=3.8.13
