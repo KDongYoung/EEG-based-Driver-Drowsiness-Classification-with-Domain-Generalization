@@ -63,6 +63,10 @@ def init_dataset(args, subj_idx, SUBJECT_LIST,seed):
 Infinite_DataLoader
 #############################################################
 '''
+"""Infinite Dataloder for each subject
+Reference:
+      Gulrajani et al. In Search of Lost Domain Generalization. ICLR 2021.
+"""
 class InfiniteDataLoader:
     def __init__(self, dataset, weights, batch_size, num_workers):
         super().__init__()
