@@ -49,15 +49,17 @@ class Trainer():
     ###########################################################################################
     '''
     def training(self, train_loaders, valid_loader, test_loader):
-        train_minibatches = zip(*train_loaders)
+        train_minibatches = zip(*train_loaders) # gather same number of samples from each subject (domain-balanced mini-batch)
 
         best_score = [100.0, 0.0, 0.0, 0.0]
         start_step=0
         self.total_lr=[]
         self.losses=[]
         
+        # select loss function
         Loss = importlib.import_module('utils.Loss.'+self.args['loss'])
         self.criterion = getattr(Loss, self.args['loss'])(**self.args)
+        
         
         for step in range(start_step, self.args['steps']):
             minibatches_device = [(x.to(self.args['device']), y.to(self.args['device'])) for x,y,_ in next(train_minibatches)] # data, class_label, domain_label
@@ -82,19 +84,15 @@ class Trainer():
 
     # Prediction
     def prediction(self, metric, test_loader, type='loader'):
-        ''' Leave-one-subject-out, test the best accuracy model '''
+        ''' Leave-one-subject-out, test the best model '''
         print("== "*10, "Testing", "== "*10)
         self.model.load_state_dict(torch.load(os.path.join(self.args['total_path'], 'models', metric ,"{}_bestmodel").format(
             self.flatten_subjectList[self.subject_id]), map_location=self.args['device']))
         if self.args['cuda']: 
             self.model.cuda(device=self.args['device'])
-
-        if type=="loader":
-            loss, acc, bacc, f1score, precision, roc_auc, recall, cost = self.eval("test", test_loader, self.args['steps']+1, 1)
-            return loss, acc, bacc, f1score, precision, roc_auc, recall, cost
-        elif type=="set":
-            loss, acc, bacc, f1score, precision, roc_auc, recall, cost = self.set_eval("test_set", test_loader, self.args['steps']+1)
-            return loss, acc, bacc, f1score, precision, roc_auc, recall, cost
+        
+        loss, acc, bacc, f1score, precision, roc_auc, recall, cost = self.eval("test", test_loader, self.args['steps']+1, 1)
+        return loss, acc, bacc, f1score, precision, roc_auc, recall, cost
     
     '''
     ###########################################################################################
