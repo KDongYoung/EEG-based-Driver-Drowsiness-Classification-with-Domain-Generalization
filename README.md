@@ -26,7 +26,7 @@ conda activate MixAlign
 pip install -r requirements.txt
 ```
 
-IF using a Docker, use the recent image file ("pytorch:22.04-py3") uploaded in the [\[NVIDIA pytorch\]](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
+IF using a Docker, use the recent image file ("pytorch:22.04-py3") uploaded in the [\[NVIDIA pytorch\]](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) when running a container
 
 
 ## Data preparation
@@ -42,6 +42,8 @@ ${DATASET_DIR}
 	|--${...}
 ```
 
+We will prepare the dataset as soon as possible.
+
 ### Training from scratch
 
 ```shell script
@@ -52,6 +54,7 @@ python TotalMain.py --mode infer
 ```
 
 The (BEST model for each SUBJECT and the tensorboard records) are saved in `${MODEL_SAVE_DIR}/{seed}_{step}_{alignment loss weight}/{model_name}` by default
+
 The results are saved in text and csv files in `${MODEL_SAVE_DIR}/{seed}_{step}_{alignment loss weight}/{Results}/{evalauation metric}` by default
 
 -> The BEST models are saved separately in each folder based on the evaluation metric used to select the model for validation.
