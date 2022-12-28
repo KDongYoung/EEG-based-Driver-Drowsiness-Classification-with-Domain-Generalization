@@ -20,7 +20,7 @@ class DriverDrowsiness():
         for idx, SBJ_NAME in enumerate(self.subjectList):
             ORI_DATA=io.loadmat(root_path+SBJ_NAME+'.mat') 
 
-            # 차원 축소
+
             self.x=np.squeeze(ORI_DATA["epoch"]["x"])
             self.x=self.x.flatten()[0]
 
@@ -40,7 +40,7 @@ class DriverDrowsiness():
                     wo7_idx.append(i)
                     self.sleep_num+=1
 
-            self.datasets.append(LG_EEGDataset(self.tr_df[wo7_idx], idx)) 
+            self.datasets.append(EEGDataset(self.tr_df[wo7_idx], idx)) 
         print("alert : sleep =",self.non_sleep_num,":",self.sleep_num)
 
     def __getitem__(self, index):
@@ -54,7 +54,7 @@ Make a EEG dataset
 X: EEG data
 Y: KSS score
 """
-class LG_EEGDataset(Dataset):
+class EEGDataset(Dataset):
     def __init__(self, dataset, subj_id):
         self.dataset = dataset
         self.len = len(dataset)
