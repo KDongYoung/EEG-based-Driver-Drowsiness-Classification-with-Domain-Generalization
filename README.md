@@ -83,6 +83,8 @@ ${MODEL_SAVE_DIR}
 
 Acc.:  Accuracy,  Std.:  Standard  deviation
 
+Repeated three times with different seed ( )
+
 
 ## Citation
 
