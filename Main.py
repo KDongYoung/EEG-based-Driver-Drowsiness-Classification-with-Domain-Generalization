@@ -32,7 +32,7 @@ def Experiment(args, subject_id, subjectList):
     # check if GPU is available, if True chooses to use it
     args['device'] = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    ## random seed 지정
+    ## fix seed
     seed = args['seed']
     random.seed(seed)
     np.random.seed(seed)
@@ -43,25 +43,27 @@ def Experiment(args, subject_id, subjectList):
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
 
+      
     if args['mode']=="train":
         valid_best = start_Training(args, subjectList, subject_id, seed) # Train
         args['mode']="infer"
         t_loss, t_acc, t_bacc, t_f1, t_preci, t_rocauc, t_recall, t_timecost = start_Inference(args, subjectList, subject_id, seed) # Leave-one-subject-out 
         args['mode']="train"
+      
     if args['mode']=="infer":
         t_loss, t_acc, t_bacc, t_f1, t_preci, t_rocauc, t_recall, t_timecost = start_Inference(args, subjectList, subject_id, seed) # Leave-one-subject-out 
         valid_best = [0]*len(args['eval_metric'])
    
     return valid_best, t_loss, t_acc, t_bacc, t_f1, t_preci, t_rocauc, t_recall, t_timecost
 
-def start_Training(args, subjectList, subject_id, seed):    
+def start_Training(args, subjectList, subject_id, seed):  # train
     num_domain=len(subjectList)-1
     
     # MODEL
     model = load_model(args, num_domain)
     if args['cuda']: model.cuda(device=args['device']) # connect DEVICE
     
-    train_loaders, valid_loader, test_loader, test_set = init_dataset(args, subject_id, subjectList, seed)
+    train_loaders, valid_loader, test_loader, test_set = init_dataset(args, subject_id, subjectList, seed) # load dataloader
     
     trainer = Trainer(args, subjectList, subjectList, subject_id, model)
     valid_best = trainer.training(train_loaders, valid_loader, test_loader) # train, valid
@@ -73,7 +75,7 @@ def start_Inference(args, subjectList, subject_id, seed): # prediction
     
     t_loss, t_acc, t_bacc, t_f1, t_preci, t_rocauc, t_recall, t_timecost = [], [], [], [], [], [], [], []
     
-    test_loader = init_dataset(args, subject_id, subjectList, seed)
+    test_loader = init_dataset(args, subject_id, subjectList, seed) # load dataloader
     
     for metric in args['eval_metric']:
         # MODEL
@@ -83,7 +85,7 @@ def start_Inference(args, subjectList, subject_id, seed): # prediction
         best_trainer=Trainer(args, subjectList, subjectList, subject_id, best_model)
         
         loss, acc, bacc, f1, preci, rocauc, recall, cost = best_trainer.prediction(metric, test_loader, type="loader")
-        cost = np.mean(cost[1:]) # buffer 속 내용 제거
+        cost = np.mean(cost[1:]) # buffer 
         
         t_loss.append(loss)
         t_acc.append(acc)
@@ -96,7 +98,7 @@ def start_Inference(args, subjectList, subject_id, seed): # prediction
         
     return t_loss, t_acc, t_bacc, t_f1, t_preci, t_rocauc, t_recall, t_timecost
     
-def load_model(args, num_domain):
+def load_model(args, num_domain): # load model
     if args['model_name']=="resnet18":
         model=Resnet18(args, num_domain)
 
@@ -112,7 +114,7 @@ def load_model(args, num_domain):
 def main(subjectList, args, model_name):
 
     args['model_name']=model_name
-
+    
     exp_type=f"{model_name}_{args['mix_type']}{''.join([str(l) for l in args['res_layer']])}_{args['align_weight']}{args['loss']}"
 
     args['result_dir']=exp_type
