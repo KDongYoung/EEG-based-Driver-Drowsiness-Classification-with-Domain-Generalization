@@ -1,6 +1,4 @@
-'''ResNet-1D in PyTorch.
-Dong-Kyun Han 2020/09/17
-dkhan@korea.ac.kr
+'''ResNet-1D with 18 layers in PyTorch.
 
 Reference:
 [1] K. He, X. Zhang, S. Ren, J. Sun
