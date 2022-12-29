@@ -15,7 +15,6 @@ class MixStyle(nn.Module):
           alpha (float): parameter of the Beta distribution.
           eps (float): scaling parameter to avoid numerical issues.
           mix (str): how to mix.
-          style: original, dirchlet, multibn
         """
         super().__init__()
         self.p = p
