@@ -1,4 +1,4 @@
-'''ResNet-1D with 18 layers in PyTorch.
+'''ResNet-1D with 18 layers in PyTorch with MixStyle augmentation
 
 Reference:
 [1] K. He, X. Zhang, S. Ren, J. Sun
