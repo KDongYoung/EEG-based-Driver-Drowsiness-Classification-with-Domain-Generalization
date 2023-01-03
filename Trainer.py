@@ -83,7 +83,7 @@ class Trainer():
         return best_score
 
     # Prediction
-    def prediction(self, metric, test_loader, type='loader'):
+    def prediction(self, metric, test_loader):
         ''' Leave-one-subject-out, test the best model '''
         print("== "*10, "Testing", "== "*10)
         self.model.load_state_dict(torch.load(os.path.join(self.args['total_path'], 'models', metric ,"{}_bestmodel").format(
