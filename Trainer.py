@@ -8,12 +8,11 @@ import importlib
 warnings.filterwarnings('ignore')
 
 class Trainer():
-    def __init__(self, args, subjectList, flatten_subjectList, subject_id, model, domain_model=None):
+    def __init__(self, args, subjectList, flatten_subjectList, subject_id, model):
         self.subjectList=subjectList
         self.subject_id=subject_id
         self.args=args
         self.model=model
-        self.domain_model=domain_model
         self.flatten_subjectList=flatten_subjectList
         self.writer = SummaryWriter(f"{self.args['total_path']}/{self.flatten_subjectList[self.subject_id]}") # tensorboard, log directory
         self.args["tensorboard"]=self.writer
