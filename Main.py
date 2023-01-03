@@ -136,7 +136,8 @@ def main(subjectList, args, model_name):
         print("~"*25 + ' Valid Subject ' + subjectList[args['subject_group']][id] + " " + "~"*25)
 
         valid_best, loss, acc, bacc, f1, preci, auc, recall, time_cost = Experiment(args, before_sbj_num+id, subjectList)
-
+        
+        ### print performance
         if args["mode"]=="train":
             valid_best=[valid_best[args["metric_dict"][i]] for i in args["eval_metric"]]
       
