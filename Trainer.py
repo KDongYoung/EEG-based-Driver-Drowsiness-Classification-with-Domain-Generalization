@@ -164,7 +164,7 @@ class Trainer():
         acc=accuracy_score(targets, preds)
         bacc=balanced_accuracy_score(targets,preds)
         f1=f1_score(targets,preds)
-        preci=precision_score(targets,preds, zero_division=0) # "warning" 숨기기
+        preci=precision_score(targets,preds, zero_division=0) 
         roc_auc=roc_auc_score(targets,preds)
         recall=recall_score(targets,preds)
 
