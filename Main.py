@@ -84,7 +84,7 @@ def start_Inference(args, subjectList, subject_id, seed): # prediction
         
         best_trainer=Trainer(args, subjectList, subjectList, subject_id, best_model)
         
-        loss, acc, bacc, f1, preci, rocauc, recall, cost = best_trainer.prediction(metric, test_loader, type="loader")
+        loss, acc, bacc, f1, preci, rocauc, recall, cost = best_trainer.prediction(metric, test_loader)
         cost = np.mean(cost[1:]) # buffer 
         
         t_loss.append(loss)
