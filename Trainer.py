@@ -72,6 +72,7 @@ class Trainer():
                 self.eval("test", test_loader, step) # test              
                 self.scheduler.step()    
                 
+                # compare performance and save the best model
                 for metric in self.args['eval_metric']: 
                     best_score[self.metric_dict[metric]] = self.compare_metric_save_model(metric, best_score[self.metric_dict[metric]], valid_score[self.metric_dict[metric]])
                                         
