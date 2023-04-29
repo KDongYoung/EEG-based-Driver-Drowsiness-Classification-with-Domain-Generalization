@@ -152,3 +152,4 @@ def main(subjectList, args, model_name):
         
             print(df_part)
             df_part.to_csv(result_path+"/"+metric_name+"/"+metric_name+"_"+str(args['seed'])+"_"+exp_type+".csv", mode="a", index=False)
+            # "best value during validation", "loss", "accuracy", "balanced accuracy", "f1-score", "precision", "recall", "auroc", "time cost to predict once"
