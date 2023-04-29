@@ -125,15 +125,10 @@ def main(subjectList, args, model_name):
         os.makedirs(result_path+"/acc")
         os.makedirs(result_path+"/bacc")
         os.makedirs(result_path+"/f1")
-        
-    before_sbj_num=0
-    for i in range(args['subject_group']):
-        before_sbj_num+=len(subjectList[i])
 
-
-    for id in range(len(subjectList[args['subject_group']])):
+    for id in range(len(subjectList)):
         print(str(args['seed']) + " / " + str(args['align_weight']) + " / " + exp_type)   
-        print("~"*25 + ' Valid Subject ' + subjectList[args['subject_group']][id] + " " + "~"*25)
+        print("~"*25 + ' Valid Subject ' + subjectList[id] + " " + "~"*25)
 
         valid_best, loss, acc, bacc, f1, preci, auc, recall, time_cost = Experiment(args, before_sbj_num+id, subjectList)
         
@@ -141,13 +136,13 @@ def main(subjectList, args, model_name):
         if args["mode"]=="train":
             valid_best=[valid_best[args["metric_dict"][i]] for i in args["eval_metric"]]
       
-        total_perf = np.array([[subjectList[args['subject_group']][id]]*len(args['eval_metric']), valid_best, loss, acc, bacc, f1, preci, recall, auc, time_cost])
+        total_perf = np.array([[subjectList[id]]*len(args['eval_metric']), valid_best, loss, acc, bacc, f1, preci, recall, auc, time_cost])
         
         print("> "*20)
         for metric_i, metric_name in enumerate(args['eval_metric']):
-            print(f"{metric_name} Valid: {valid_best[metric_i]:.2f}, TEST_SUBJECT: {subjectList[args['subject_group']][id]}, ACCURACY: {acc[metric_i]:.4f}%, PRECISION: {preci[metric_i]:.4f}%, RECALL: {recall[metric_i]:.4f}%")
+            print(f"{metric_name} Valid: {valid_best[metric_i]:.2f}, TEST_SUBJECT: {subjectList[id]}, ACCURACY: {acc[metric_i]:.4f}%, PRECISION: {preci[metric_i]:.4f}%, RECALL: {recall[metric_i]:.4f}%")
             with open(result_path+"/"+metric_name+"/"+metric_name+"_"+str(args['seed'])+"_"+exp_type+'_Accuracy.txt', 'a') as f:
-                f.write(f"valid_best: {valid_best[metric_i]:.2f}, {subjectList[args['subject_group']][id]}, acc: {acc[metric_i]:.4f}, bacc: {bacc[metric_i]:.4f}, f1: {f1[metric_i]:.4f}, precision: {preci[metric_i]:.4f}, recall: {recall[metric_i]:.4f}\n") # save test performance   
+                f.write(f"valid_best: {valid_best[metric_i]:.2f}, {subjectList[id]}, acc: {acc[metric_i]:.4f}, bacc: {bacc[metric_i]:.4f}, f1: {f1[metric_i]:.4f}, precision: {preci[metric_i]:.4f}, recall: {recall[metric_i]:.4f}\n") # save test performance   
         
         
         df=pd.DataFrame(total_perf)
