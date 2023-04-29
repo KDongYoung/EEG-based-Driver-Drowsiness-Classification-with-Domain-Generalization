@@ -33,7 +33,6 @@ parser.add_argument('--valid-batch-size', type=int, default=1, metavar='N', help
 parser.add_argument('--test-batch-size', type=int, default=1, metavar='N', help='input batch size for ONLINE testing (default: 1)')
 parser.add_argument('--num_workers', type=int, default=0, metavar='N', help='number worker') 
 
-parser.add_argument('--subject_group', type=int, default=7, metavar='N', help='subject_group') 
 parser.add_argument('--steps', type=int, default=0, help='Number of steps')
 parser.add_argument('--checkpoint_freq', type=int, default=50, help='Checkpoint every N steps')
 parser.add_argument('--seed', type=int, default=2032, help='seed') 
